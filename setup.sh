@@ -83,6 +83,7 @@ while [[ $# -gt 0 ]]; do
 			echo "  -bsd                     Setting up for BSD/MacOS"
 			echo "  -h"
 			echo "  --help                   Print this message"
+			exit 0
 			;;
 		# Unknown option
 		-*|--*)
