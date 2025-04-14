@@ -1,0 +1,244 @@
+#!/bin/bash
+# Written by JoshP751
+# The main script for papersv
+
+# Default values
+bin_directory="--bin-dir--"
+data_directory="--data-dir--"
+silence=0
+positional=()
+
+command="$1"
+
+# Argument processing
+while [[ $# -gt 0 ]]; do
+	case $2 in
+		-q|--quiet)
+			silence=1
+			shift
+			;;
+		# Positional option
+		*)
+			positional+=("$2")
+			shift
+			;;
+	esac
+done
+
+set -- "${positional[@]}"
+
+# Check the command
+case "$command" in
+	# Create backup
+	backup)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/backup.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/backup.sh" "${positional[@]}"
+		fi
+		;;
+	# View a servers screen
+	view)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/open.sh" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/open.sh"
+		fi
+		;;
+	# Create backup
+	backup)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/backup.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/backup.sh" "${positional[@]}"
+		fi
+		;;
+	# View a servers screen
+	view)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/open.sh" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/open.sh" 
+		fi
+		;;
+	# Send a server a message
+	send)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/message.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/message.sh" "${positional[@]}"
+		fi
+		;;
+	# Restart a server
+	restart)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/restart.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/restart.sh" "${positional[@]}"
+		fi
+		;;
+	# Start a server
+	start)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/start.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/start.sh" "${positional[@]}"
+		fi
+		;;
+	# Stop a server
+	stop)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/stop.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/stop.sh" "${positional[@]}"
+		fi
+		;;
+	# Update a server
+	update)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/update.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/update.sh" "${positional[@]}"
+		fi
+		;;
+	# Install a plugin
+	plugin)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$1/plugin.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$1/plugin.sh" "${positional[@]}"
+		fi
+		;;
+	# Create a new server
+	create)
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/create.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/create.sh" "${positional[@]}"
+		fi
+		;;
+	# Run a command
+	command)
+		servername="$1"
+		positional[0]=""
+		if [[ $silence -eq 1 ]]; then
+			"$data_directory/papersv/$servername/message.sh" "${positional[@]}" > /dev/NULL
+		else
+			"$data_directory/papersv/$servername/message.sh" "${positional[@]}"
+		fi
+		;;
+	# Uninstall papersv
+	uninstall)
+		"$data_directory/papersv/uninstall.sh"
+		;;
+	# Remove the server
+	remove)
+		"$data_directory/papersv/$servername/remove.sh"
+		;;
+	# Print the help message
+	help)
+		case "$1" in
+			create)
+				echo "Usage: papersv create (name) [options]"
+				echo " Create a new server"
+				echo ""
+				echo "options:"
+				echo "  -j (opt) --java (opt)        Add (opt) to the list of options given to java"
+				echo "  -p (opt) --paper (opt)       Add (opt) to the list of options given to paper"
+				echo "  -r (memory) --ram (memory)   Set the server to use the amount of ram specified in (memory)"
+				echo "  -d (mins) --delay (mins)     Set the stop / restart delay in minutes"
+				echo "  --aikar                      Use Aikar's set of java flags"
+				echo "  --bsd                        Creating on a BSD or BSD like target"
+				echo "  --plugin (plugin)            Add the plugin to the server"
+				;;
+			start)
+				echo "Usage: papersv start (name) [options]"
+				echo " Start the specified server"
+				echo ""
+				echo "options:"
+				echo "  -q --quiet                   Silence the usual start messages"
+				;;
+			stop)
+				echo "Usage: papersv stop (name) [options]"
+				echo " Stop the specified server"
+				echo ""
+				echo "options:"
+				echo "  -q --quiet                   Silence the usual stop messages"
+				;;
+			restart)
+				echo "Usage: papersv restart (name) [options]"
+				echo " Restart the specified server"
+				echo ""
+				echo "options:"
+				echo "  -q --quiet                   Silence the usual restart messages"
+				;;
+			view)
+				echo "Usage: papersv view (name)"
+				echo " View the specified servers log; press Ctrl-A + Ctrl-D to exit"
+				;;
+			command)
+				echo "Usage: papersv command (server) (command)"
+				echo " Run the command on the specified server"
+				;;
+			plugin)
+				echo "Usage: papersv plugin (name) (link) [options]"
+				echo " Install a plugin to the specified server"
+				echo ""
+				echo "options:"
+				echo "  -q --quiet                   Silence the usual install messages"
+				;;
+			update)
+				echo "Usage: papersv update (name) [options]"
+				echo " Update the specified server or files"
+				echo ""
+				echo "(name) may be the name of a server or either 'papersv' or 'default'"
+				echo " using 'papersv' updates papersv itself while 'default' updates the default version of paper"
+				echo ""
+				echo "options:"
+				echo "  -p (link) --plugin (link)    Update a plugin"
+				echo "  --paper                      Update paper either to specified or latest"
+				echo "  -b --build                   Update paper to the build number"
+				echo "  -v --version                 Update paper to the mc version"
+				echo "  --bsd                        Updating on a BSD or BSD like target"
+				echo "  -q --quiet                   Silence the usual install messages"
+				;;
+			backup)
+				echo "Usage: papersv backup (name) [options]"
+				echo " Create a backup of the specified server; these are also created whenever the server starts"
+				echo ""
+				echo "options:"
+				echo "  -q --quiet                   Silence the usual backup messages"
+				;;
+			uninstall)
+				echo "Usage: papersv uninstall"
+				echo " Uninstall papersv"
+				;;
+			remove)
+				echo "Usage: papersv remove (name)"
+				echo " Remove the specified server"
+				;;
+			*)
+				echo "Usage: papersv (command) [options]"
+				echo " Papersv is a set of utilities for PaperMC servers"
+				echo ""
+				echo "commands:"
+				echo "  create (name) [options]                   Create a new server with the specified name"
+				echo "  start (name) [options]                    Start the specified server"
+				echo "  stop (name) [options]                     Stop the specified server"
+				echo "  restart (name) [options]                  Restart the specified server"
+				echo "  view (server) (name)                      View the specified servers log; press Ctrl-A + Ctrl-D to exit"
+				echo "  command (server) (command)                Run the command on the specified server"
+				echo "  plugin (name) (plugin) (link) [options]   Add a plugin to the server"
+				echo "  update (name) [options]                   Update the specified server or files"
+				echo "  backup (name) [options]                   Create a backup of the specified server; these are also created whenever the server starts"
+				echo "  help [command]                            Print the help message for the command or a generic message if non is provided"
+				echo "  uninstall                                 Uninstall papersv"
+				echo "  remove (name)                             Remove the specified server"
+				;;
+		esac
+		;;
+	*)
+		echo "Unknown command $1, use 'papersv help' help"
+		exit -1
+		;;
+esac
