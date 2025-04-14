@@ -15,5 +15,13 @@ fi
 # Install the plugin
 dir=$(pwd)
 cd "$data_directory/papersv/$servername/plugins/"
-wget "$2"
+c=0
+# Download the plugins
+for i in $*; do
+	if [[ c -eq 1 ]]; then
+		wget "$i"
+	else
+		c=1
+	fi
+done
 cd "$dir"

@@ -69,6 +69,21 @@ while [[ $# -gt 0 ]]; do
 			for_bsd=1
 			shift
 			;;
+		-h|--help)
+			echo "Usage: setup.sh [options]"
+			echo " Setup papersv"
+			echo ""
+			echo "options:"
+			echo "  --bin <dir>              Set the binary directory"
+			echo "  --data <dir>             Set the data directory"
+			echo "  -v <version>"
+			echo "  --version                Set the MineCraft version"
+			echo "  -b <build>"
+			echo "  --build <build>          Set the Paper build #"
+			echo "  -bsd                     Setting up for BSD/MacOS"
+			echo "  -h"
+			echo "  --help                   Print this message"
+			;;
 		# Unknown option
 		-*|--*)
 			echo "Unknown option $1, type -h or --help for help"
