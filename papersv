@@ -96,9 +96,9 @@ case "$command" in
 	# Update a server
 	update)
 		if [[ $silence -eq 1 ]]; then
-			"$data_directory/papersv/$1/update.sh" "${positional[@]}" > /dev/NULL
+			"$data_directory/papersv/update.sh" "${positional[@]}" > /dev/NULL
 		else
-			"$data_directory/papersv/$1/update.sh" "${positional[@]}"
+			"$data_directory/papersv/update.sh" "${positional[@]}"
 		fi
 		;;
 	# Install a plugin
