@@ -13,14 +13,14 @@ positional=()
 
 # Argument processing
 while [[ $# -gt 0 ]]; do
-	case $2 in
+	case $1 in
 		# Positional option
 		--no-backup)
 			backup=0
 			shift
 			;;
 		*)
-			positional+=("$2")
+			positional+=("$1")
 			shift
 			;;
 	esac
@@ -36,7 +36,7 @@ fi
 
 if [[ "$backup" -eq 1 ]]; then
 	# Backup
-	"$data_directory/papersv/$servername/backup.sh" 
+	"$data_directory/papersv/$servername/backup.sh" --type create # This is an undocumented type 
 	echo "backup of $servername has been created"
 fi
 

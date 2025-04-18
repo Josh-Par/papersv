@@ -11,6 +11,8 @@ plugins=()
 ram="4G"
 for_bsd=0
 delay=5
+backups=5
+create_full_backups=1
 
 # Functions
 # Copy a file and replace currently known --*-- values
@@ -23,6 +25,8 @@ function copy_file() {
 		sed -i -e "s#--paper-opts--#$paper#" "$1-tmp"
 		sed -i -e "s#--server-name--#$servername#" "$1-tmp"
 		sed -i -e "s#--server-delay--#$delay#" "$1-tmp"
+		sed -i -e "s#--num-backups--#$backups#" "$1-tmp"
+		sed -i -e "s#--create-full-count--#$create_full_backups#" "$1-tmp"
 	else
 		sed -i '' -e "s#--bin-dir--#$bin_directory#" "$1-tmp"
 		sed -i '' -e "s#--data-dir--#$data_directory#" "$1-tmp"
@@ -30,6 +34,8 @@ function copy_file() {
 		sed -i '' -e "s#--paper-opts--#$paper#" "$1-tmp"
 		sed -i '' -e "s#--server-name--#$servername#" "$1-tmp"
 		sed -i '' -e "s#--server-delay--#$delay#" "$1-tmp"
+		sed -i '' -e "s#--num-backups--#$backups#" "$1-tmp"
+		sed -i '' -e "s#--create-full-count--#$create_full_backups#" "$1-tmp"
 	fi
 	cp "$1-tmp" "$2"
 	rm "$1-tmp"
@@ -70,10 +76,12 @@ while [[ $# -gt 0 ]]; do
 			shift
 			shift
 			;;
+		# Running on a BSD system
 		--bsd)
 			for_bsd=1
 			shift
 			;;
+		# Add a plugin
 		--plugin)
 			plugins+=("$2")
 			shift
@@ -82,6 +90,22 @@ while [[ $# -gt 0 ]]; do
 		# Use Aikars flags
 		--aikar)
 			java+="-XX:+AlwaysPreTouch\\ -XX:+DisableExplicitGC\\ -XX:+ParallelRefProcEnabled\\ -XX:+PerfDisableSharedMem\\ -XX:+UnlockExperimentalVMOptions\\ -XX:+UseG1GC\\ -XX:G1HeapRegionSize=8M\\ -XX:G1HeapWastePercent=5\\ -XX:G1MaxNewSizePercent=40\\ -XX:G1MixedGCCountTarget=4\\ -XX:G1MixedGCLiveThresholdPercent=90\\ -XX:G1NewSizePercent=30\\ -XX:G1RSetUpdatingPauseTimePercent=5\\ -XX:G1ReservePercent=20\\ -XX:InitiatingHeapOccupancyPercent=15\\ -XX:MaxGCPauseMillis=200\\ -XX:MaxTenuringThreshold=1\\ -XX:SurvivorRatio=32\\ -Dusing.aikars.flags=https://mcflags.emc.gs\\ -Daikars.new.flags=true"
+			shift
+			;;
+		# Set the number of backups
+		-b|--backups)
+			backups=$2
+			shift
+			shift
+			;;
+		# Set the number of full backups
+		-f|--full)
+			if [[ $2 -le $backups ]]; then
+				echo "The number of full backups can't exceed the number of backups, ignoring option $1 $2"
+			elif
+				create_full_backups=$2
+			fi
+			shift
 			shift
 			;;
 		# Unknown option

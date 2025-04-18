@@ -42,6 +42,8 @@ Starting a server is done with `papersv start $name`.
 Restart a server is done with `papersv restart $name`.  
 Stopping a server is done with `papersv stop $name`.
 When stopping or restarting the server the players are given a countdown, this can be interupted by pressing *i*.
+### Notes
+* A backup is created everytime 
 ## Updating
 ### Updating a server
 To update a server run `papersv update $name [--plugin $link] [--paper --version $version --build $build]`.  

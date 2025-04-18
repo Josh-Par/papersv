@@ -76,13 +76,10 @@ while [[ $# -gt 0 ]]; do
 			echo "options:"
 			echo "  --bin <dir>              Set the binary directory"
 			echo "  --data <dir>             Set the data directory"
-			echo "  -v <version>"
-			echo "  --version                Set the MineCraft version"
-			echo "  -b <build>"
-			echo "  --build <build>          Set the Paper build #"
+			echo "  -v, --version            Set the MineCraft version"
+			echo "  -b, --build <build>      Set the Paper build #"
 			echo "  -bsd                     Setting up for BSD/MacOS"
-			echo "  -h"
-			echo "  --help                   Print this message"
+			echo "  -h, --help               rint this message"
 			exit 0
 			;;
 		# Unknown option
