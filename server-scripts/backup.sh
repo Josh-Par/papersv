@@ -5,7 +5,7 @@
 bin_directory="--bin-dir--"
 data_directory="--data-dir--"
 servername="--server-name--"
-backup_prefix="$data_directory/papersv/$servername/backups/"
+backup_prefix="$data_directory/papersv/$servername/backups"
 
 # Check if the server is running
 if screen -ls | grep -q "\.$servername\s"; then

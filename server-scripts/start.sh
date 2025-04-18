@@ -7,6 +7,26 @@ data_directory="--data-dir--"
 servername="--server-name--"
 java_opts="--java-opts--"
 paper_opts="--paper-opts--"
+backup=1
+
+positional=()
+
+# Argument processing
+while [[ $# -gt 0 ]]; do
+	case $2 in
+		# Positional option
+		--no-backup)
+			backup=0
+			shift
+			;;
+		*)
+			positional+=("$2")
+			shift
+			;;
+	esac
+done
+
+set -- "${positional[@]}"
 
 # Check if the server is running
 if screen -ls | grep -q "\.$servername\s"; then
@@ -14,9 +34,11 @@ if screen -ls | grep -q "\.$servername\s"; then
 	exit -1
 fi
 
-# Backup
-"$data_directory/papersv/$servername/backup.sh" 
-echo "backup of $servername has been created"
+if [[ "$backup" -eq 1 ]]; then
+	# Backup
+	"$data_directory/papersv/$servername/backup.sh" 
+	echo "backup of $servername has been created"
+fi
 
 # Start server
 dir=$(pwd)

@@ -162,6 +162,7 @@ case "$command" in
 				echo "options:"
 				echo "  -q"
 				echo "  --quiet                  Silence the usual start messages"
+				echo "  --no-backup              Don't create the usual backup"
 				;;
 			stop)
 				echo "Usage: papersv stop (server) [options]"
@@ -235,7 +236,6 @@ case "$command" in
 				echo " Papersv is a set of utilities for PaperMC servers"
 				echo ""
 				echo "commands:"
-				echo "  -q"
 				echo "  create (name) [options]                     Create a new server with the specified name"
 				echo "  start (server) [options]                    Start the specified server"
 				echo "  stop (server) [options]                     Stop the specified server"
