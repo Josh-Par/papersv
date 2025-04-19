@@ -102,7 +102,7 @@ while [[ $# -gt 0 ]]; do
 		-f|--full)
 			if [[ $2 -le $backups ]]; then
 				echo "The number of full backups can't exceed the number of backups, ignoring option $1 $2"
-			elif
+			else
 				create_full_backups=$2
 			fi
 			shift

@@ -91,7 +91,6 @@ case "$1" in
 		download_file "server-scripts/plugin.sh" "$data_directory/papersv/server-scripts/plugin.sh"
 		download_file "server-scripts/message.sh" "$data_directory/papersv/server-scripts/message.sh"
 		download_file "create.sh" "$data_directory/papersv/create.sh"
-		download_file "update.sh" "$data_directory/papersv/update.sh"
 		;;
 	# Update default paper
 	default)
