@@ -15,7 +15,7 @@ update_paper=0
 # Functions
 # Download a file from the repository and replace currently known --*-- values
 function download_file() {
-	wget "https://github.com/JoshP751/papersv/blob/main/$1" -O "$1-tmp"
+	wget "https://raw.githubusercontent.com/JoshP751/papersv/refs/heads/main/$1" -O "$1-tmp"
 	if [[ for_bsd -eq 0 ]]; then
 		sed -i -e "s:--bin-dir--:$bin_directory:g" "$1-tmp"
 		sed -i -e "s:--data-dir--:$data_directory:g" "$1-tmp"
