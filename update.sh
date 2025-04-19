@@ -17,11 +17,11 @@ update_paper=0
 function download_file() {
 	wget "https://raw.githubusercontent.com/JoshP751/papersv/refs/heads/main/$1" -O "$1-tmp"
 	if [[ for_bsd -eq 0 ]]; then
-		sed -i -e "s:--bin-dir--:$bin_directory:g" "$1-tmp"
-		sed -i -e "s:--data-dir--:$data_directory:g" "$1-tmp"
+		sed -i -e "s:--bin-dir--:$bin_directory:" "$1-tmp"
+		sed -i -e "s:--data-dir--:$data_directory:" "$1-tmp"
 	else
-		sed -i '' -e "s:--bin-dir--:$bin_directory:g" "$1-tmp"
-		sed -i '' -e "s:--data-dir--:$data_directory:g" "$1-tmp"
+		sed -i '' -e "s:--bin-dir--:$bin_directory:" "$1-tmp"
+		sed -i '' -e "s:--data-dir--:$data_directory:" "$1-tmp"
 	fi
 	cp "$1-tmp" "$2"
 	rm "$1-tmp"
