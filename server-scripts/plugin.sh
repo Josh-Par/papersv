@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by JoshP751
+# Written by Josh-Par
 # Install a plugin
 
 bin_directory="--bin-dir--"

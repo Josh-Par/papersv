@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by JoshP751
+# Written by Josh-Par
 # Creates a new server
 
 bin_directory="--bin-dir--"

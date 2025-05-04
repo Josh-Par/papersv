@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by JoshP751
+# Written by Josh-Par
 # Backup the server
 
 bin_directory="--bin-dir--"
@@ -62,9 +62,9 @@ done
 if [[ "$backup_type" == "create" ]]; then
 	# Check if the number of full backups equals the number wanted
 	if [[ $full_count -ge $create_full_count ]]; then
-		type="world"
+		backup_type="world"
 	else
-		type="full"
+		backup_type="full"
 	fi
 fi
 

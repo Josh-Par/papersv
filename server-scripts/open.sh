@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by JoshP751
+# Written by Josh-Par
 # Open the view screen for the server
 
 bin_directory="--bin-dir--"

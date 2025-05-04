@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by JoshP751
+# Written by Josh-Par
 # Updates the specified target
 
 bin_directory="--bin-dir--"
@@ -15,7 +15,7 @@ update_paper=0
 # Functions
 # Download a file from the repository and replace currently known --*-- values
 function download_file() {
-	wget "https://raw.githubusercontent.com/JoshP751/papersv/refs/heads/main/$1" -O "$1-tmp"
+	wget "https://raw.githubusercontent.com/Josh-Par/papersv/refs/heads/main/$1" -O "$1-tmp"
 	if [[ for_bsd -eq 0 ]]; then
 		sed -i -e "s:--bin-dir--:$bin_directory:" "$1-tmp"
 		sed -i -e "s:--data-dir--:$data_directory:" "$1-tmp"
